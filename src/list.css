@@ -1,0 +1,72 @@
+.medication-list-container {
+    padding: 24px;
+    background-color: #f9fafc;
+    font-family: 'Roboto', sans-serif;
+    max-width: 1000px;
+    margin: auto;
+}
+
+.mui-accordion {
+    margin-bottom: 16px;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.mui-accordion-summary {
+    background-color: #eef1f5;
+    font-weight: 500;
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 24px;
+}
+
+.mui-accordion-summary:hover {
+    background-color: #e1e5eb;
+    cursor: pointer;
+}
+
+.medicine-header {
+    font-size: 1rem;
+    color: #2e3c53;
+}
+
+.atc-info {
+    font-size: 0.9rem;
+    color: #5f738c;
+}
+
+.mui-accordion-details {
+    background-color: #ffffff;
+    padding: 16px 24px;
+    border-top: 1px solid #ddd;
+}
+
+.medicine-id-part-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #1a2e49;
+}
+
+.timeline-entry {
+    padding: 12px;
+    border: 1px solid #d1dbe7;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    background-color: #f7f9fc;
+}
+
+.timeline-entry span {
+    display: inline-block;
+    margin-right: 16px;
+    font-size: 0.9rem;
+    color: #333;
+}
+
+@media (max-width: 600px) {
+    .timeline-entry span {
+        display: block;
+        margin-bottom: 4px;
+    }
+}
