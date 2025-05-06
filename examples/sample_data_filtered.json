@@ -503,7 +503,7 @@
                             },
                             {
                                 "url": "medicineIdPart",
-                                "valuePositiveInt": 2135345448
+                                "valuePositiveInt": 2135345558
                             },
                             {
                                 "url": "newest",
@@ -665,6 +665,13 @@
                         "url": "http://resepti.kanta.fi/fhir/StructureDefinition/extension/statusBasicReference",
                         "valueReference": {
                             "reference": "#10"
+                        }
+                    },
+                    {
+                        "url": "http://resepti.kanta.fi/fhir/StructureDefinition/extension/structuredIndication",
+                        "valueCoding": {
+                            "code": "224.67",
+                            "system": "urn:oid:1.2.246.537.6.1.1999"
                         }
                     }
                 ],
@@ -927,7 +934,7 @@
                             },
                             {
                                 "url": "medicineIdPart",
-                                "valuePositiveInt": 2135345448
+                                "valuePositiveInt": 2135345558
                             }
                         ],
                         "url": "http://resepti.kanta.fi/fhir/StructureDefinition/extension/continuum"
@@ -954,6 +961,27 @@
                     {
                         "url": "http://resepti.kanta.fi/fhir/StructureDefinition/extension/stopReasonText",
                         "valueString": "L\u00e4\u00e4kkeen lopetuksen lis\u00e4tiedot"
+                    },
+                    {
+                        "url": "http://resepti.kanta.fi/fhir/StructureDefinition/extension/adverseEffect",
+                        "valueCoding": {
+                            "code": "254.54",
+                            "system": "urn:oid:1.2.246.537.6.1.1999"
+                        }
+                    },
+                    {
+                        "url": "http://resepti.kanta.fi/fhir/StructureDefinition/extension/adverseEffect",
+                        "valueCoding": {
+                            "code": "144.97",
+                            "system": "urn:oid:1.2.246.537.6.1.1999"
+                        }
+                    },
+                    {
+                        "url": "http://resepti.kanta.fi/fhir/StructureDefinition/extension/structuredIndication",
+                        "valueCoding": {
+                            "code": "222.61",
+                            "system": "urn:oid:1.2.246.537.6.1.1999"
+                        }
                     }
                 ],
                 "id": "1.2.246.10.11111111.93001.2024.11712309571038123",
@@ -993,7 +1021,7 @@
                     "reference": "#3"
                 },
                 "dosageInstruction": [],
-                "authoredOn": "04/27/2020 02:49:57"
+                "authoredOn": "10/30/2021 04:21:53"
             }
         },
         {
@@ -1653,6 +1681,27 @@
                         "valueReference": {
                             "reference": "#10"
                         }
+                    },
+                    {
+                        "url": "http://resepti.kanta.fi/fhir/StructureDefinition/extension/adverseEffect",
+                        "valueCoding": {
+                            "code": "275.43",
+                            "system": "urn:oid:1.2.246.537.6.1.1999"
+                        }
+                    },
+                    {
+                        "url": "http://resepti.kanta.fi/fhir/StructureDefinition/extension/structuredIndication",
+                        "valueCoding": {
+                            "code": "376.23",
+                            "system": "urn:oid:1.2.246.537.6.1.1999"
+                        }
+                    },
+                    {
+                        "url": "http://resepti.kanta.fi/fhir/StructureDefinition/extension/structuredIndication",
+                        "valueCoding": {
+                            "code": "323.68",
+                            "system": "urn:oid:1.2.246.537.6.1.1999"
+                        }
                     }
                 ],
                 "id": "1.2.246.10.11111111.93001.2024.11889663514872133",
@@ -1941,6 +1990,27 @@
                     {
                         "url": "http://resepti.kanta.fi/fhir/StructureDefinition/extension/stopReasonText",
                         "valueString": "L\u00e4\u00e4kkeen lopetuksen lis\u00e4tiedot"
+                    },
+                    {
+                        "url": "http://resepti.kanta.fi/fhir/StructureDefinition/extension/adverseEffect",
+                        "valueCoding": {
+                            "code": "248.86",
+                            "system": "urn:oid:1.2.246.537.6.1.1999"
+                        }
+                    },
+                    {
+                        "url": "http://resepti.kanta.fi/fhir/StructureDefinition/extension/adverseEffect",
+                        "valueCoding": {
+                            "code": "174.26",
+                            "system": "urn:oid:1.2.246.537.6.1.1999"
+                        }
+                    },
+                    {
+                        "url": "http://resepti.kanta.fi/fhir/StructureDefinition/extension/structuredIndication",
+                        "valueCoding": {
+                            "code": "254.17",
+                            "system": "urn:oid:1.2.246.537.6.1.1999"
+                        }
                     }
                 ],
                 "id": "1.2.246.10.11111111.93001.2024.365985521475872134",
@@ -1980,7 +2050,7 @@
                     "reference": "#3"
                 },
                 "dosageInstruction": [],
-                "authoredOn": "02/18/2022 12:20:45"
+                "authoredOn": "07/10/2023 14:44:16"
             }
         },
         {
@@ -2541,6 +2611,20 @@
                             }
                         ],
                         "url": "http://resepti.kanta.fi/fhir/StructureDefinition/extension/invalidation"
+                    },
+                    {
+                        "url": "http://resepti.kanta.fi/fhir/StructureDefinition/extension/adverseEffect",
+                        "valueCoding": {
+                            "code": "131.97",
+                            "system": "urn:oid:1.2.246.537.6.1.1999"
+                        }
+                    },
+                    {
+                        "url": "http://resepti.kanta.fi/fhir/StructureDefinition/extension/structuredIndication",
+                        "valueCoding": {
+                            "code": "184.54",
+                            "system": "urn:oid:1.2.246.537.6.1.1999"
+                        }
                     }
                 ],
                 "id": "1.2.246.10.11111111.93001.2023.11711543513963258",
@@ -2634,7 +2718,7 @@
                 "mode": "working",
                 "resourceType": "List",
                 "status": "current",
-                "authoredOn": "01/16/2023 07:07:38"
+                "authoredOn": "02/05/2023 01:16:50"
             }
         },
         {
@@ -2687,7 +2771,7 @@
                 "mode": "working",
                 "resourceType": "List",
                 "status": "current",
-                "authoredOn": "02/28/2021 14:26:49"
+                "authoredOn": "01/17/2024 20:48:56"
             }
         },
         {
@@ -2728,7 +2812,7 @@
                 "mode": "working",
                 "resourceType": "List",
                 "status": "current",
-                "authoredOn": "04/10/2021 00:42:28"
+                "authoredOn": "12/03/2024 21:56:46"
             }
         }
     ],

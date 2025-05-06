@@ -30,7 +30,8 @@ class SampleGenerator:
                 for entry in bundle_data["entry"]:
                     if entry.get("resource").get("resourceType") == "MedicationRequest":
                         entry = correct_additional_instructions(entry)
-               
+                        generate_adverse_effects(random.randint(0, 2), entry)
+                        generate_indication(random.randint(0, 2), entry)
                         print("ID: ",entry.get("resource").get("id"))
                     print("Authored On: ",entry.get("resource").get("authoredOn"))
                     if entry.get("resource").get("authoredOn") is None:
@@ -108,20 +109,31 @@ def random_datetime(start, end):
     formatted_dt = rand_dt.strftime("%m/%d/%Y %H:%M:%S")
     return formatted_dt
 
-
-adverse_effects = {
+def generate_adverse_effects(number_of_adverse_effects, entry):
+    
+    
+    for i in range(number_of_adverse_effects):
+        random_string =str(random.randint(1, 3)) + str(random.randint(1, 9))+ str(random.randint(1, 9)) + "." + str(random.randint(1, 9)) + str(random.randint(1, 9))
+        adverse_effect = {
                         "url": "http://resepti.kanta.fi/fhir/StructureDefinition/extension/adverseEffect",
                         "valueCoding": {
-                            "code": "G43.9#",
+                            "code": f"{random_string}",
                             "system": "urn:oid:1.2.246.537.6.1.1999"
                         }
                     }
+        entry.get("resource").get("extension").append(adverse_effect)
 
 
-indication = {
+
+def generate_indication(number_of_indications, entry):
+    for i in range(number_of_indications):
+        random_string =str(random.randint(1, 3)) + str(random.randint(1, 9))+ str(random.randint(1, 9)) + "." + str(random.randint(1, 9)) + str(random.randint(1, 9))
+        indication = {
                         "url": "http://resepti.kanta.fi/fhir/StructureDefinition/extension/structuredIndication",
                         "valueCoding": {
-                            "code": "J06.9",
+                            "code": f"{random_string}",
                             "system": "urn:oid:1.2.246.537.6.1.1999"
                         }
                     }
+        entry.get("resource").get("extension").append(indication)
+

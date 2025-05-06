@@ -70,3 +70,20 @@
         margin-bottom: 4px;
     }
 }
+
+.accordion-summary {
+    padding: 12px;
+    display: flex;
+    justify-content: space-between;
+    color: #333;
+    background-color: #e7e6dc;
+
+}
+
+.adverse-effect {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+    color: #333;
+}

@@ -15,7 +15,6 @@ def get_medication_history():
     parser = Parser()
     parser.parse_json_data()
     data = parser.get_medications()
-    print("data: ", data)
     return jsonify(data) 
 
 if __name__ == "__main__":
