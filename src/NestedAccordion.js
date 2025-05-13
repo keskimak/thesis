@@ -23,8 +23,12 @@ function NestedAccordion() {
     const [selectedValue, setSelectedValue] = useState("mau");
     const [selectedMedicineId, setSelectedMedicineId] = useState(null);
     const [selectedMedData, setSelectedMedData] = useState(null);
+    const [selectedPartId, setSelectedPartId] = useState(null);
+    const [selectedPartData, setSelectedPartData] = useState(null);
     const [openAd, setOpenAd] = useState(false);
     const [openId, setOpenId] = useState(false);
+    const [openNestedAd, setOpenNestedAd] = useState(false);
+    const [openNestedId, setOpenNestedId] = useState(false);
 
     useEffect(() => {
         setLoading(true);
@@ -70,20 +74,33 @@ function NestedAccordion() {
         setOpenAd(true);
     };
 
+
     const handleClickOpenId = (medicineId, medData) => {
         setSelectedMedicineId(medicineId);
         setSelectedMedData(medData);
         setOpenId(true);
     };
+    const handleClickOpenNestedAd = (partId, partData) => {
+        setSelectedPartId(partId);
+        setSelectedPartData(partData);
+        setOpenNestedAd(true);
+    };
+    const handleClickOpenNestedId = (partId, partData) => {
+        setSelectedPartId(partId);
+        setSelectedPartData(partData);
+        setOpenNestedId(true);
+    };
+
 
     const handleClose = () => {
         setOpenAd(false);
         setOpenId(false);
+        setOpenNestedAd(false);
+        setOpenNestedId(false);
     };
     return (
         <div className="medication-list-container">
-            <h1>Medication History</h1>
-
+            <h1 style={{ textAlign: 'center' }}>Medication History</h1>
             {Object.entries(data).map(([medicineId, medData]) => (
                 <Accordion key={medicineId}>
                     <AccordionSummary className="accordion-summary" expandIcon={<ExpandMoreIcon />}>
@@ -91,10 +108,10 @@ function NestedAccordion() {
                             <Typography className="atc-info" style={{ flex: 1 }}>{medData.atc_display} ({medData.atc_code})</Typography>
                             <Typography className="atc-info" style={{ flex: 1 }}>continuums: {Object.keys(medData.medicine_id_part).length}</Typography>
                             <br />
-                            <Button variant="outlined" style={{ flex: 0.5 }} onClick={() => handleClickOpenAd(medicineId, medData)}>
+                            <Button variant="outlined" style={{ flex: 0.5 }} size="small" onClick={() => handleClickOpenAd(medicineId, medData)}>
                                 ADVERSE EFFECTS
                             </Button>
-                            <Button variant="outlined" style={{ flex: 0.5 }} onClick={() => handleClickOpenId(medicineId, medData)}>
+                            <Button variant="outlined" style={{ flex: 0.5 }} size="small" onClick={() => handleClickOpenId(medicineId, medData)}>
                                 INDICATIONS
                             </Button>
 
@@ -103,20 +120,30 @@ function NestedAccordion() {
                     <AccordionDetails>
                         {Object.entries(medData.medicine_id_part).map(([partId, partData]) => (
                             <Accordion key={partId}>
-                                <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                                <AccordionSummary className="accordion-summary" expandIcon={<ExpandMoreIcon />}>
                                     <Typography className="atc-info" style={{ flex: 1 }}> {partData.medication_requests[0].product} {partData.medication_requests[0].strength} {partData.medication_requests[0].form}</Typography>
-                                    <Typography className="atc-info" style={{ flex: 1 }}>authored on: {partData.medication_requests[0].authored_on}</Typography>
                                     <Typography className="atc-info" style={{ flex: 1 }}>MedicationRequests: {partData.medication_requests.length}</Typography>
-                                    <Button variant="outlined" style={{ flex: 0.5 }} onClick={() => handleClickOpenAd(medicineId, partData)}>
+                                    <Button
+                                        variant="outlined"
+                                        size="small"
+                                        style={{ flex: 0.5 }}
+                                        onClick={() => handleClickOpenNestedAd(partId, partData)}
+                                    >
                                         ADVERSE EFFECTS
                                     </Button>
-                                    <Button variant="outlined" style={{ flex: 0.5 }} onClick={() => handleClickOpenId(medicineId, partData)}>
+                                    <Button
+                                        variant="outlined"
+                                        size="small"
+                                        className="accordion-button"
+                                        style={{ flex: 0.5 }}
+                                        onClick={() => handleClickOpenNestedId(partId, partData)}
+                                    >
                                         INDICATIONS
                                     </Button>
                                 </AccordionSummary>
                                 <AccordionDetails>
                                     {partData.medication_requests.map((req, idx) => (
-                                        <Typography className="atc-info">
+                                        <Typography className="atc-info" style={{ flex: 1 }} key={idx}>
                                             <pre>{JSON.stringify(req, null, 2)}</pre>
                                         </Typography>
                                     ))}
@@ -135,9 +162,9 @@ function NestedAccordion() {
                             part.medication_requests.flatMap((req, reqIdx) =>
                                 (req.adverse_effects || []).map((ae, aeIdx) => (
                                     <ListItem disablePadding key={`${req.id}-${aeIdx}`}>
-                                        <ListItemText primary={`AE: ${ae.code}`} />
-                                        <ListItemText primary={`Reported: ${req.authored_on}`} />
+                                        <ListItemText primary={`${req.authored_on}: ${ae.display}`} />
                                     </ListItem>
+
 
                                 ))
                             )
@@ -151,15 +178,49 @@ function NestedAccordion() {
                     {selectedMedData && Object.values(selectedMedData.medicine_id_part)
                         .flatMap(part =>
                             part.medication_requests.flatMap((req, reqIdx) =>
-                                (req.indications || []).map((ind, indIdx) => (
-                                    <ListItem disablePadding key={`${req.id}-${indIdx}`}>
-                                        <ListItemText primary={`Indication: ${ind.code}`} />
-                                        <ListItemText primary={`Reported: ${req.authored_on}`} />
-                                    </ListItem>
-
-                                ))
+                                (req.indications || []).map((ind, indIdx) => ({
+                                    ...ind,
+                                    authored_on: req.authored_on,
+                                    reqId: req.id
+                                }))
                             )
-                        )}
+                        )
+                        .sort((a, b) => new Date(b.authored_on) - new Date(a.authored_on))
+                        .map((ind, idx) => (
+                            <ListItem disablePadding key={`${ind.reqId}-${idx}`}>
+                                <ListItemText primary={`${ind.authored_on}: ${ind.display}`} />
+                            </ListItem>
+                        ))}
+                </List>
+            </Dialog>
+            <Dialog onClose={handleClose} open={openNestedAd}>
+                <DialogTitle>ADVERSE EFFECTS</DialogTitle>
+                <List sx={{ pt: 0 }}>
+                    {selectedPartData && Object.values(selectedPartData.medication_requests)
+                        .flatMap((req, reqIdx) =>
+                            (req.adverse_effects || []).map((ae, aeIdx) => (
+                                <ListItem disablePadding key={`${req.id}-${aeIdx}`}>
+                                    <ListItemText primary={`${req.authored_on}: ${ae.display}`} />
+                                </ListItem>
+
+                            ))
+                        )
+                    }
+                </List>
+            </Dialog>
+            <Dialog onClose={handleClose} open={openNestedId}>
+                <DialogTitle>INDICATIONS</DialogTitle>
+                <List sx={{ pt: 0 }}>
+                    {selectedPartData && Object.values(selectedPartData.medication_requests)
+                        .flatMap((req, reqIdx) =>
+                            (req.indications || []).map((ind, indIdx) => (
+                                <ListItem disablePadding key={`${req.id}-${indIdx}`}>
+                                    <ListItemText primary={`${ind.authored_on}: ${ind.display}`} />
+                                </ListItem>
+
+                            ))
+                        )
+                    }
                 </List>
             </Dialog>
         </div >

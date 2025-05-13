@@ -41,22 +41,7 @@ def main():
             print(f"  Medicine ID Part: {mr.get('medicine_id_part')}")
         print("---")
 
-def test_sample_data_with_parser():
-    print("  ")
-    print("Testing sample data with parser")
-    print("  ")
-    parser = MedicationListParser(file_path="examples/sample_data_filtered.json")
-    parser.parse_json_data(None)
-    mr = parser.get_medication_requests()
-    print("Example data: Medication requests: ", len(mr))
-    for m in mr:
-        print("id: ", m.get("id"))
-        print("medicine_id: ", m.get("medicine_id"))
-        print("medicine_id_part: ", m.get("medicine_id_part"))
-        print("adverse_effects: ", m.get("adverse_effects"))
-        print("indications: ", m.get("indications"))
-        print("authoredOn: ", m.get("authoredOn"))
-        print("---")
+
 
 def test_laakityslista():
     print("  ")
